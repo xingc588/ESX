@@ -1,4 +1,5 @@
-# XC-Trash can - 翻垃圾桶插件
+#
+SJ工作室星辰 - 翻垃圾桶插件
 
 一个为FiveM ESX服务器设计的翻垃圾桶插件，玩家可以翻垃圾桶来获得随机奖励。
 
@@ -15,7 +16,7 @@
 ## 安装说明
 
 1. 确保已安装 `okokNotify` 通知系统
-2. 将 `XC-Trash can` 文件夹放入 `resources/[星辰]/` 目录
+2. 将 `XC-Trashcan` 文件夹放入 `resources目录
 3. 在 `server.cfg` 中添加：`ensure XC-Trash can`
 4. 重启服务器
 
@@ -87,7 +88,7 @@
 ## 文件结构
 
 ```
-XC-Trash can/
+XC-Trashcan/
 ├── fxmanifest.lua      # 资源清单
 ├── config.lua          # 配置文件
 ├── client.lua          # 客户端脚本
@@ -102,9 +103,9 @@ XC-Trash can/
 ## 版本信息
 
 - 版本: 1.0.0
-- 作者: XC-星辰
+- 作者: 星辰
 - 兼容性: ESX 1.10.1+
-- 框架: FiveM
+- 框架: FiveM-ESX,es_extended
 
 ## 支持
 
@@ -118,3 +119,4 @@ XC-Trash can/
 - 随机奖励系统
 - 进度条界面
 - 音效支持
+

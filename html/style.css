@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: transparent;
+    overflow: hidden;
+    user-select: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#progress-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.progress-wrapper {
+    background: rgba(220, 20, 60, 0.6);
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.system-title {
+    color: #FFD700;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.progress-title {
+    color: #4CAF50;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: none;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.8), rgba(139, 195, 74, 0.8));
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.1s ease-out;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+.progress-text {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: none;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: none;
+    }
+}
+
+.progress-wrapper:hover {
+    animation: pulse 2s infinite;
+}
+
+/* ==================== 通知系统样式 ==================== */
+#notification-container {
+    position: fixed;
+    top: 155px;
+    left: 5px;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.notification {
+    background: rgba(255, 192, 203, 0.9);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: none;
+    backdrop-filter: none;
+    border: none;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.hide {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    animation: progressBar 5s linear forwards;
+}
+
+.notification.success::before {
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.notification.error::before {
+    background: linear-gradient(90deg, #f44336, #ff5722);
+}
+
+.notification.info::before {
+    background: linear-gradient(90deg, #2196F3, #03A9F4);
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.notification-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.notification.success .notification-icon {
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    color: white;
+}
+
+.notification.error .notification-icon {
+    background: linear-gradient(135deg, #f44336, #ff5722);
+    color: white;
+}
+
+.notification.info .notification-icon {
+    background: linear-gradient(135deg, #2196F3, #03A9F4);
+    color: white;
+}
+
+.notification-title {
+    color: #8B0000;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.notification-message {
+    color: #4B0000;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    margin-left: 36px;
+}
+
+.notification-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #8B0000;
+    font-size: 18px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.notification-close:hover {
+    background: rgba(139, 0, 0, 0.2);
+    color: #4B0000;
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .progress-wrapper {
+        min-width: 250px;
+        padding: 15px;
+    }
+    
+    .progress-title {
+        font-size: 16px;
+    }
+    
+    .progress-bar {
+        height: 15px;
+    }
+    
+    .progress-text {
+        font-size: 12px;
+    }
+    
+    #notification-container {
+        top: 145px;
+        left: 5px;
+        right: 10px;
+    }
+    
+    .notification {
+        min-width: auto;
+        max-width: none;
+    }
+}
